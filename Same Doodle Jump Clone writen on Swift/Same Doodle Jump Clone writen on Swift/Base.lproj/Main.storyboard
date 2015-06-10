@@ -96,6 +96,7 @@
                     <connections>
                         <outlet property="ballImage" destination="P4P-Zk-OVS" id="LXv-Tr-nI6"/>
                         <outlet property="platformImage" destination="Ve9-w4-3s1" id="XHB-34-piM"/>
+                        <outlet property="startGameButtonOut" destination="ZW8-OF-aHc" id="Hc6-YJ-TNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZl-Sm-N7r" userLabel="First Responder" sceneMemberID="firstResponder"/>
