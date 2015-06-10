@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E503393C-FC2A-49A9-9CD4-28BE82FEF895</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B575C634B00754782E34A6EFE55FEA27F740E627</key>
+		<string>https://github.com/Fenkins/Doodle-Jump-Clone-writen-on-Swift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Same Doodle Jump Clone writen on Swift/Same Doodle Jump Clone writen on Swift.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B575C634B00754782E34A6EFE55FEA27F740E627</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Fenkins/Doodle-Jump-Clone-writen-on-Swift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B575C634B00754782E34A6EFE55FEA27F740E627</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B575C634B00754782E34A6EFE55FEA27F740E627</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Doodle%20Jump%20Clone%20writen%20on%20Swift</string>
+		</dict>
+	</array>
+</dict>
+</plist>
