@@ -42,8 +42,10 @@ class GameViewController: UIViewController {
 
     func Moving() {
         ballImage.center = CGPointMake(ballImage.center.x, ballImage.center.y - UpMovement)
-        if (CGRectIntersectsRect(ballImage.frame, platformImage.frame) && (UpMovement <= 0)) { self.Bounce()}
-    UpMovement = UpMovement - 0.1
+        UpMovement -= 0.1
+        if (CGRectIntersectsRect(ballImage.frame, platformImage.frame) && (UpMovement <= 0)) {
+            Bounce()
+        }
     }
     
     func Bounce() {
@@ -52,11 +54,12 @@ class GameViewController: UIViewController {
         arrayImage.append(UIImage(named: "ballSQ2.png")!)
         arrayImage.append(UIImage(named: "ballSQ1.png")!)
         arrayImage.append(UIImage(named: "ball.png")!)
-        
+
         ballImage.animationImages = arrayImage
         ballImage.animationRepeatCount = 1
         ballImage.animationDuration = 0.2
         ballImage.startAnimating()
+        
         UpMovement = 5
     }
     
@@ -64,7 +67,7 @@ class GameViewController: UIViewController {
         startGameButtonOut.hidden = true
         platformImage.hidden = false
         UpMovement = -5
-        var Movement = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: "Moving", userInfo: nil, repeats: true)
+        var repeatThis = NSTimer.scheduledTimerWithTimeInterval(0.02, target: self, selector: "Moving", userInfo: nil, repeats: true)
     }
     
 }
