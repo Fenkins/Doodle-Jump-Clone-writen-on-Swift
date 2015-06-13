@@ -13,15 +13,30 @@ class GameViewController: UIViewController {
     }
     @IBOutlet weak var ballImage: UIImageView!
     @IBOutlet weak var platformImage: UIImageView!
-
+    @IBOutlet weak var platformImage1: UIImageView!
+    @IBOutlet weak var platformImage2:UIImageView!
+    @IBOutlet weak var platformImage3:UIImageView!
+    @IBOutlet weak var platformImage4:UIImageView!
     @IBOutlet weak var startGameButtonOut: UIButton!
     
     var UpMovement:CGFloat = 0
+    var SideMovement:CGFloat = 0
+    var MoveLeft = false
+    var MoveRight = false
+    var StopSideMovement = false
+    var screenWidth:CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        platformImage.hidden = true
         // Do any additional setup after loading the view.
+        platformImage.hidden = true
+        platformImage1.hidden = true
+        platformImage2.hidden = true
+        platformImage3.hidden = true
+        platformImage4.hidden = true
+        
+        let screenRect = UIScreen.mainScreen().bounds
+        screenWidth = screenRect.width
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,8 +81,16 @@ class GameViewController: UIViewController {
     func GameStarted() {
         startGameButtonOut.hidden = true
         platformImage.hidden = false
+        platformImage1.hidden = false
+        platformImage2.hidden = false
+        platformImage3.hidden = false
+        platformImage4.hidden = false
         UpMovement = -5
         var repeatThis = NSTimer.scheduledTimerWithTimeInterval(0.02, target: self, selector: "Moving", userInfo: nil, repeats: true)
+        var randomPosition = CGFloat(arc4random_uniform(248))
+        randomPosition += platformImage1.bounds.width/2
+        platformImage1.center = CGPointMake(randomPosition, 448)
+        
     }
     
 }

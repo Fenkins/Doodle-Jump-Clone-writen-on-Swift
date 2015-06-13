@@ -90,12 +90,32 @@
                                 <rect key="frame" x="120" y="528" width="80" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="platform.png" id="Avb-YW-S2h">
+                                <rect key="frame" x="37" y="310" width="80" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="platform.png" id="EsS-fj-8KB">
+                                <rect key="frame" x="184" y="251" width="80" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="platform.png" id="B19-WO-JJ0">
+                                <rect key="frame" x="184" y="403" width="80" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="platform.png" id="g2N-hl-QkJ">
+                                <rect key="frame" x="69" y="144" width="80" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="ballImage" destination="P4P-Zk-OVS" id="LXv-Tr-nI6"/>
                         <outlet property="platformImage" destination="Ve9-w4-3s1" id="XHB-34-piM"/>
+                        <outlet property="platformImage1" destination="B19-WO-JJ0" id="QFf-R6-vJa"/>
+                        <outlet property="platformImage2" destination="Avb-YW-S2h" id="RN4-pI-cqY"/>
+                        <outlet property="platformImage3" destination="EsS-fj-8KB" id="2UI-ar-Nb6"/>
+                        <outlet property="platformImage4" destination="g2N-hl-QkJ" id="l91-NO-Uqs"/>
                         <outlet property="startGameButtonOut" destination="ZW8-OF-aHc" id="Hc6-YJ-TNF"/>
                     </connections>
                 </viewController>
