@@ -26,6 +26,9 @@ class GameViewController: UIViewController {
     var StopSideMovement = false
     var screenWidth:CGFloat = 0.0
     
+    var platform2sideMovement:CGFloat = 0.0
+    var platform4sideMovement:CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -61,6 +64,7 @@ class GameViewController: UIViewController {
         if (CGRectIntersectsRect(ballImage.frame, platformImage.frame) && (UpMovement <= 0)) {
             Bounce()
         }
+        PlatformMovement()
     }
     
     func Bounce() {
@@ -91,6 +95,28 @@ class GameViewController: UIViewController {
         randomPosition += platformImage1.bounds.width/2
         platformImage1.center = CGPointMake(randomPosition, 448)
         
+        randomPosition = CGFloat(arc4random_uniform(248))
+        randomPosition += platformImage2.bounds.width/2
+        platformImage2.center = CGPointMake(randomPosition, 336)
+        
+        randomPosition = CGFloat(arc4random_uniform(248))
+        randomPosition += platformImage3.bounds.width/2
+        platformImage3.center = CGPointMake(randomPosition, 224)
+        
+        randomPosition = CGFloat(arc4random_uniform(248))
+        randomPosition += platformImage4.bounds.width/2
+        platformImage4.center = CGPointMake(randomPosition, 112)
+        
+        platform2sideMovement = 2.0
+        platform4sideMovement = -2.0
+        
+    }
+    
+    // Moving platforms left and right
+    func PlatformMovement() {
+        platformImage2.center = CGPointMake(platformImage2.center.x + platform2sideMovement, platformImage2.center.y)
+        platformImage4.center = CGPointMake(platformImage4.center.x + platform4sideMovement, platformImage4.center.y)
+        //check the edges collision
     }
     
 }
