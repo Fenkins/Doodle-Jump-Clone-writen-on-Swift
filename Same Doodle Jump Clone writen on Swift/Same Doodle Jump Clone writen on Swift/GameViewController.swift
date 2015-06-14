@@ -26,6 +26,8 @@ class GameViewController: UIViewController {
     var StopSideMovement = false
     var screenWidth:CGFloat = 0.0
     
+    let movingConstant:Float = 0.1
+    
     var platform2sideMovement:CGFloat = 0.0
     var platform4sideMovement:CGFloat = 0.0
     
@@ -76,7 +78,26 @@ class GameViewController: UIViewController {
     */
 
     func Moving() {
-        ballImage.center = CGPointMake(ballImage.center.x, ballImage.center.y - UpMovement)
+        if MoveLeft == true {
+            SideMovement -= CGFloat(movingConstant * 3)
+            if SideMovement <= -5 {
+                SideMovement = -5
+            }
+            if ballImage.center.x <= ballImage.bounds.width/2 {
+                ballImage.center.x = screenWidth - (ballImage.bounds.width/2)
+            }
+        }
+        if MoveRight == true {
+            SideMovement += CGFloat(movingConstant * 3)
+            if SideMovement >= 5 {
+                SideMovement = 5
+            }
+            if ballImage.center.x >= screenWidth - (ballImage.bounds.width/2) {
+                ballImage.center.x = ballImage.bounds.width/2
+            }
+        }
+        
+        ballImage.center = CGPointMake(ballImage.center.x + SideMovement, ballImage.center.y - UpMovement)
         UpMovement -= 0.1
         if (CGRectIntersectsRect(ballImage.frame, platformImage.frame) && (UpMovement <= 0)) {
             Bounce()
@@ -124,8 +145,8 @@ class GameViewController: UIViewController {
         randomPosition += platformImage4.bounds.width/2
         platformImage4.center = CGPointMake(randomPosition, 112)
         
-        platform2sideMovement = 2.0
-        platform4sideMovement = -2.0
+        platform2sideMovement = 1.5
+        platform4sideMovement = -1.5
         
     }
     
