@@ -47,6 +47,23 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        StopSideMovement = false
+        if let touch = touches.first as? UITouch {
+            if touch.locationInView(self.view).x > screenWidth/2 {
+                MoveRight = true
+            } else if touch.locationInView(self.view).x < screenWidth/2 {
+                MoveLeft = true
+            }
+        }
+        
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        StopSideMovement = true
+        MoveLeft = false
+        MoveRight = false
+    }
 
     /*
     // MARK: - Navigation
@@ -116,7 +133,12 @@ class GameViewController: UIViewController {
     func PlatformMovement() {
         platformImage2.center = CGPointMake(platformImage2.center.x + platform2sideMovement, platformImage2.center.y)
         platformImage4.center = CGPointMake(platformImage4.center.x + platform4sideMovement, platformImage4.center.y)
-        //check the edges collision
+        //Checking the edges collision
+        if platformImage2.center.x >= screenWidth - (platformImage2.bounds.width/2) || platformImage2.center.x <= 0 + (platformImage2.bounds.width/2) {
+            platform2sideMovement *= -1
+        } else if platformImage4.center.x >= screenWidth - (platformImage4.bounds.width/2) || platformImage4.center.x <= 0 + (platformImage4.bounds.width/2) {
+            platform4sideMovement *= -1
+        }
     }
     
 }
