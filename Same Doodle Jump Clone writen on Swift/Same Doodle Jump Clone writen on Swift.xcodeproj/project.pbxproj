@@ -450,6 +450,7 @@
 				AA1A9B051B288B4E00A22C7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA1A9B061B288B4E00A22C7B /* Build configuration list for PBXNativeTarget "Same Doodle Jump Clone writen on SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +459,7 @@
 				AA1A9B081B288B4E00A22C7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
