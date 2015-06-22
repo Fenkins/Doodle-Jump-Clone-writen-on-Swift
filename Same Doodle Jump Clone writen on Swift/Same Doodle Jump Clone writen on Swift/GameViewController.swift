@@ -53,6 +53,10 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func gameOver() {
+        
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         StopSideMovement = false
         if let touch = touches.first as? UITouch {
@@ -82,6 +86,15 @@ class GameViewController: UIViewController {
     */
 
     func Moving() {
+        if ballImage.center.y > (screenHeight + ballImage.bounds.height) {
+            gameOver()
+        }
+        
+        // We dont want for ball to go higher then half of the screen
+        if ballImage.center.y > (screenHeight - ballImage.bounds.height/2) {
+            ballImage.center = CGPointMake(ballImage.center.x, screenHeight)
+        }
+        
         if MoveLeft == true {
             SideMovement -= CGFloat(movingConstant * 3)
             //Maximum speed is 5
@@ -103,7 +116,7 @@ class GameViewController: UIViewController {
         }
         
         ballImage.center = CGPointMake(ballImage.center.x + SideMovement, ballImage.center.y - UpMovement)
-        UpMovement -= 0.1
+        UpMovement -= CGFloat(movingConstant)
         if CGRectIntersectsRect(ballImage.frame, platformImage.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
@@ -138,8 +151,16 @@ class GameViewController: UIViewController {
         ballImage.animationRepeatCount = 1
         ballImage.animationDuration = 0.2
         ballImage.startAnimating()
-        
-        UpMovement = 5
+            // CounterWeight
+        if ballImage.center.y > 450 {
+            UpMovement = 5
+        }
+        if ballImage.center.y > 350 {
+            UpMovement = 4
+        }
+        if ballImage.center.y > 150 {
+            UpMovement = 3
+        }
     }
     
     func GameStarted() {
@@ -172,7 +193,7 @@ class GameViewController: UIViewController {
         
     }
     
-    // Moving platforms left and right
+    // Moving platforms left and right * also up and down
     func PlatformMovement() {
         platformImage.center = CGPointMake(platformImage.center.x, platformImage.center.y + PlatformDropDownFor)
         platformImage1.center = CGPointMake(platformImage1.center.x, platformImage1.center.y + PlatformDropDownFor)
@@ -219,22 +240,22 @@ class GameViewController: UIViewController {
     }
     
     func PlatformDropDown() {
-        if ballImage.center.y > (screenHeight - 50) {
+        if ballImage.center.y > 500 {
             PlatformDropDownFor = 1.0
         }
-        if ballImage.center.y > (screenHeight - 100) {
+        if ballImage.center.y > 450 {
             PlatformDropDownFor = 2.0
         }
-        if ballImage.center.y > (screenHeight - 150) {
+        if ballImage.center.y > 400 {
             PlatformDropDownFor = 3.0
         }
-        if ballImage.center.y > (screenHeight - 250) {
+        if ballImage.center.y > 300 {
             PlatformDropDownFor = 4.0
         }
-        if ballImage.center.y > (screenHeight - 300) {
+        if ballImage.center.y > 250 {
             PlatformDropDownFor = 5.0
         }
-        if ballImage.center.y > (screenHeight - 400) {
+        if ballImage.center.y > 200 {
             PlatformDropDownFor = 6.0
         }
     }
