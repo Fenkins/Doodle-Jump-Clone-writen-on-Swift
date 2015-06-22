@@ -19,6 +19,13 @@ class GameViewController: UIViewController {
     @IBOutlet weak var platformImage4:UIImageView!
     @IBOutlet weak var startGameButtonOut: UIButton!
     
+    @IBOutlet weak var currentScore: UILabel!
+    @IBOutlet weak var gameOverStatus: UILabel!
+    @IBOutlet weak var scoreCount: UILabel!
+    @IBOutlet weak var scoreNewRecordSet: UILabel!
+    @IBOutlet weak var playAgainButtonOut: UIButton!
+    
+    
     var PlatformDropDownFor:CGFloat = 0.0
     
     var UpMovement:CGFloat = 0
@@ -34,6 +41,19 @@ class GameViewController: UIViewController {
     var platform2sideMovement:CGFloat = 0.0
     var platform4sideMovement:CGFloat = 0.0
     
+    var repeatThis = NSTimer()
+    
+    var scoreNumber:Int = 0
+    var highScoreNumber:Int = 0
+    var addedScore:Int = 0
+    var levelNumber:Int = 1
+    
+    var platformUsed = false
+    var platform1Used = false
+    var platform2Used = false
+    var platform3Used = false
+    var platform4Used = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,9 +63,22 @@ class GameViewController: UIViewController {
         platformImage3.hidden = true
         platformImage4.hidden = true
         
+        gameOverStatus.hidden = true
+        scoreCount.hidden = true
+        scoreNewRecordSet.hidden = true
+        playAgainButtonOut.hidden = true
+        
         let screenRect = UIScreen.mainScreen().bounds
         screenWidth = screenRect.width
         screenHeight = screenRect.height
+        
+        platformUsed = false
+        platform1Used = false
+        platform2Used = false
+        platform3Used = false
+        platform4Used = false
+        
+        highScoreNumber = NSUserDefaults.standardUserDefaults().integerForKey("HighScoreSaved")
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,8 +86,44 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func scoring() {
+        // Raising the score as the ball goes higher. Method is ticking with the moving method
+        scoreNumber += addedScore
+        addedScore -= 1
+        if addedScore < 0 {
+            addedScore = 0
+        }
+        currentScore.text = "Score: " + "\(scoreNumber)"
+        if scoreNumber > 500 && scoreNumber < 1000 {
+            levelNumber = 2
+        }
+        if scoreNumber/levelNumber > 500 {
+            levelNumber += 1
+        }
+    }
+    
     func gameOver() {
+        platformImage.hidden = true
+        platformImage1.hidden = true
+        platformImage2.hidden = true
+        platformImage3.hidden = true
+        platformImage4.hidden = true
+        ballImage.hidden = true
+        currentScore.hidden = true
         
+        gameOverStatus.hidden = false
+        playAgainButtonOut.hidden = false
+        if scoreNumber > highScoreNumber {
+            NSUserDefaults.standardUserDefaults().setInteger(scoreNumber, forKey: "HighScoreSaved")
+            scoreNewRecordSet.hidden = false
+            scoreNewRecordSet.text = "You've set the New Record: " +  "\(scoreNumber)"
+        }
+        else {
+            scoreCount.hidden = false
+            scoreCount.text = "Your HighScore: " + "\(scoreNumber)"
+        }
+        UpMovement = 0
+        SideMovement = 0
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -86,8 +155,10 @@ class GameViewController: UIViewController {
     */
 
     func Moving() {
-        if ballImage.center.y > (screenHeight + ballImage.bounds.height) {
+        if ballImage.center.y > screenHeight {
+            // Stopping the game
             gameOver()
+            repeatThis.invalidate()
         }
         
         // We dont want for ball to go higher then half of the screen
@@ -120,24 +191,45 @@ class GameViewController: UIViewController {
         if CGRectIntersectsRect(ballImage.frame, platformImage.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
+            if platformUsed == false {
+                addedScore = 10
+                platformUsed = true
+            }
         }
         if CGRectIntersectsRect(ballImage.frame, platformImage1.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
+            if platform1Used == false {
+                addedScore = 10
+                platform1Used = true
+            }
         }
         if CGRectIntersectsRect(ballImage.frame, platformImage2.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
+            if platform2Used == false {
+                addedScore = 10
+                platform2Used = true
+            }
         }
         if CGRectIntersectsRect(ballImage.frame, platformImage3.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
+            if platform3Used == false {
+                addedScore = 10
+                platform3Used = true
+            }
         }
         if CGRectIntersectsRect(ballImage.frame, platformImage4.frame) && UpMovement <= 0 {
             Bounce()
             PlatformDropDown()
+            if platform4Used == false {
+                addedScore = 10
+                platform4Used = true
+            }
         }
         PlatformMovement()
+        scoring()
     }
     
     func Bounce() {
@@ -172,7 +264,7 @@ class GameViewController: UIViewController {
         platformImage3.hidden = false
         platformImage4.hidden = false
         UpMovement = -5
-        var repeatThis = NSTimer.scheduledTimerWithTimeInterval(0.02, target: self, selector: "Moving", userInfo: nil, repeats: true)
+        repeatThis = NSTimer.scheduledTimerWithTimeInterval(0.02, target: self, selector: "Moving", userInfo: nil, repeats: true)
         var randomPosition = CGFloat(arc4random_uniform(248))
         randomPosition += platformImage1.bounds.width/2
         platformImage1.center = CGPointMake(randomPosition, 448)
@@ -217,26 +309,31 @@ class GameViewController: UIViewController {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage.bounds.size.width))))
             randomPosition += (platformImage.bounds.size.width/2)
             platformImage.center = CGPointMake(randomPosition, -(platformImage.bounds.size.height))
+            platformUsed = false
         }
         if platformImage1.center.y >= (screenHeight + platformImage1.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage1.bounds.size.width))))
             randomPosition += (platformImage1.bounds.size.width/2)
             platformImage1.center = CGPointMake(randomPosition, -(platformImage1.bounds.size.height))
+            platform1Used = false
         }
         if platformImage2.center.y >= (screenHeight + platformImage2.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage2.bounds.size.width))))
             randomPosition += (platformImage2.bounds.size.width/2)
             platformImage2.center = CGPointMake(randomPosition, -(platformImage2.bounds.size.height))
+            platform2Used = false
         }
         if platformImage3.center.y >= (screenHeight + platformImage3.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage3.bounds.size.width))))
             randomPosition += (platformImage3.bounds.size.width/2)
             platformImage3.center = CGPointMake(randomPosition, -(platformImage3.bounds.size.height))
+            platform3Used = false
         }
         if platformImage4.center.y >= (screenHeight + platformImage4.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage4.bounds.size.width))))
             randomPosition += (platformImage4.bounds.size.width/2)
             platformImage4.center = CGPointMake(randomPosition, -(platformImage4.bounds.size.height))
+            platform4Used = false
         }
 println("PLATFORMS COORD__0___ \(platformImage.center.x),\(platformImage.center.y)")
 println("PLATFORMS COORD__1___ \(platformImage1.center.x),\(platformImage1.center.y)")
@@ -267,5 +364,6 @@ println("PLATFORMS COORD__4___ \(platformImage4.center.x),\(platformImage4.cente
         }
 println("PLATFORM DROPPED_____ \(PlatformDropDownFor)__")
     }
+    
     
 }
