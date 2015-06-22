@@ -142,6 +142,7 @@ class GameViewController: UIViewController {
     
     func Bounce() {
         var arrayImage:[UIImage] = []
+        arrayImage.append(UIImage(named: "ball.png")!)
         arrayImage.append(UIImage(named: "ballSQ1.png")!)
         arrayImage.append(UIImage(named: "ballSQ2.png")!)
         arrayImage.append(UIImage(named: "ballSQ1.png")!)
@@ -212,27 +213,27 @@ class GameViewController: UIViewController {
             PlatformDropDownFor = 0
         }
         //Checking if platform is falled off the screen and bringing platforms back from the top
-        if platformImage.center.y > (screenHeight - platformImage.bounds.size.height) {
+        if platformImage.center.y >= (screenHeight - platformImage.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage.bounds.size.width/2))))
             randomPosition += (platformImage.bounds.size.width/2)
             platformImage.center = CGPointMake(randomPosition, -(platformImage.bounds.size.height/2))
         }
-        if platformImage1.center.y > (screenHeight - platformImage1.bounds.size.height) {
+        if platformImage1.center.y >= (screenHeight - platformImage1.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage1.bounds.size.width/2))))
             randomPosition += (platformImage1.bounds.size.width/2)
             platformImage1.center = CGPointMake(randomPosition, -(platformImage1.bounds.size.height/2))
         }
-        if platformImage2.center.y > (screenHeight - platformImage2.bounds.size.height) {
+        if platformImage2.center.y >= (screenHeight - platformImage2.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage2.bounds.size.width/2))))
             randomPosition += (platformImage2.bounds.size.width/2)
             platformImage2.center = CGPointMake(randomPosition, -(platformImage2.bounds.size.height/2))
         }
-        if platformImage3.center.y > (screenHeight - platformImage3.bounds.size.height) {
+        if platformImage3.center.y >= (screenHeight - platformImage3.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage3.bounds.size.width/2))))
             randomPosition += (platformImage3.bounds.size.width/2)
             platformImage4.center = CGPointMake(randomPosition, -(platformImage3.bounds.size.height/2))
         }
-        if platformImage4.center.y > (screenHeight - platformImage4.bounds.size.height) {
+        if platformImage4.center.y >= (screenHeight - platformImage4.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage4.bounds.size.width/2))))
             randomPosition += (platformImage4.bounds.size.width/2)
             platformImage4.center = CGPointMake(randomPosition, -(platformImage4.bounds.size.height/2))
