@@ -231,13 +231,19 @@ class GameViewController: UIViewController {
         if platformImage3.center.y >= (screenHeight + platformImage3.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage3.bounds.size.width))))
             randomPosition += (platformImage3.bounds.size.width/2)
-            platformImage4.center = CGPointMake(randomPosition, -(platformImage3.bounds.size.height))
+            platformImage3.center = CGPointMake(randomPosition, -(platformImage3.bounds.size.height))
         }
         if platformImage4.center.y >= (screenHeight + platformImage4.bounds.size.height/2) {
             var randomPosition = CGFloat(arc4random_uniform(UInt32(screenWidth - (platformImage4.bounds.size.width))))
             randomPosition += (platformImage4.bounds.size.width/2)
             platformImage4.center = CGPointMake(randomPosition, -(platformImage4.bounds.size.height))
         }
+println("PLATFORMS COORD__0___ \(platformImage.center.x),\(platformImage.center.y)")
+println("PLATFORMS COORD__1___ \(platformImage1.center.x),\(platformImage1.center.y)")
+println("PLATFORMS COORD__2___ \(platformImage2.center.x),\(platformImage2.center.y)")
+println("PLATFORMS COORD__3___ \(platformImage3.center.x),\(platformImage3.center.y)")
+println("PLATFORMS COORD__4___ \(platformImage4.center.x),\(platformImage4.center.y)")
+
     }
     
     func PlatformDropDown() {
@@ -259,6 +265,7 @@ class GameViewController: UIViewController {
         if ballImage.center.y > 200 {
             PlatformDropDownFor = 6.0
         }
+println("PLATFORM DROPPED_____ \(PlatformDropDownFor)__")
     }
     
 }
